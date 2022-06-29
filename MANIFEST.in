@@ -1,0 +1,6 @@
+include AUTHORS
+include LICENSE
+include README.rst
+recursive-include logviewer/templates *
+recursive-include logviewer/static *
+recursive-include logviewer/locale *
