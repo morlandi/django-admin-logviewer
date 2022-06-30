@@ -1,23 +1,70 @@
-{% extends "admin/base_site.html" %}
-{% load i18n static i18n admin_modify admin_urls %}
+{% extends "logviewer/base.html" %}
+{% load i18n static admin_modify admin_urls %}
+
 
 {% block content %}
-    <h1>{{ logs }}</h1>
-
-
-    <fieldset class="module aligned collapse collapsed">
-        <h2>Metadata (<a id="fieldsetcollapser0" class="collapse-toggle" href="#">Show</a>)</h2>
-        <div class="form-row field-created">
-                <div>
-                        <label>Created:</label>
-                            <div class="readonly">-</div>
+    {% for log in logs %}
+         <fieldset class="module aligned collapse">
+            <h2>{{ log }}</h2>
+            <div class="log">
+                <div style="text-align: center; width: 100%; margin-bottom: 5px;">
+                    <div class="log-windows" id="log-window-{{forloop.counter0}}" rows=20>
+                    </div>
                 </div>
-        </div>
-    </fieldset>
-
-
-
-
+            </div>
+        </fieldset>
+    {% endfor %}
 
 {% endblock content %}
 
+
+{% block extrahead %}
+    {{ block.super }}
+    <script type="text/javascript">
+
+        var log_objects = [];
+
+        (function ($) {
+
+            {% for log in logs %}
+                var selector = '#log-window-{{forloop.counter0}}';
+                var log_object = new Log($(selector), '{{log}}');
+                log_object.startReading();
+                log_objects.push(log_object);
+            {% endfor %}
+
+            var timer = setInterval(tick, 1000);
+        })(django.jQuery);
+
+        function tick() {
+            console.log(log_objects);
+        }
+
+    </script>
+{% endblock extrahead %}
+
+
+
+{% block extrastyle %}
+    {{ block.super }}
+    <style>
+
+        fieldset.collapsed div.log {
+            display: none;
+        }
+
+        .log-windows {
+            width: 98%;
+            text-align: left;
+            background-color: #000;
+            color: #ccc;
+            font-size: 14px;
+            height: 250px;
+            overflow: auto;
+            padding: 10px;
+            line-height: 18px;
+            margin: 0 auto;
+        }
+
+    </style>
+{% endblock extrastyle %}
