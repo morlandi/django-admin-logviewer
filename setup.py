@@ -19,7 +19,9 @@ setup(
     platforms=['OS Independent'],
     description="Allows the viewing and download of specific log files in "
                 "real time directly from the Django admin interface. ",
+
     long_description=read('README.md'),
+    long_description_content_type='text/markdown',
     author='Mario Orlandi',
     author_email='morlandi@brainstorm.it',
     packages=find_packages(),
