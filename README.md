@@ -9,7 +9,7 @@ Inspired by [Django LogTailer](https://github.com/fireantology/django-logtailer)
 1) Install Django LogViewer:
 
 ```
-pip install django-logviewer
+pip install django-admin-logviewer
 ```
 
 2) Add it to your `INSTALLED_APPS`:

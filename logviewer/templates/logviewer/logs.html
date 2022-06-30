@@ -2,6 +2,22 @@
 {% load i18n static i18n admin_modify admin_urls %}
 
 {% block content %}
-    <h1>hello</h1>
+    <h1>{{ logs }}</h1>
+
+
+    <fieldset class="module aligned collapse collapsed">
+        <h2>Metadata (<a id="fieldsetcollapser0" class="collapse-toggle" href="#">Show</a>)</h2>
+        <div class="form-row field-created">
+                <div>
+                        <label>Created:</label>
+                            <div class="readonly">-</div>
+                </div>
+        </div>
+    </fieldset>
+
+
+
+
+
 {% endblock content %}
 
