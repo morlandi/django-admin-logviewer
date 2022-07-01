@@ -4,7 +4,7 @@ Allows the viewing and download of specific log files in real time directly from
 
 Inspired by [Django LogTailer](https://github.com/fireantology/django-logtailer)
 
-### Installation
+### Quick start
 
 1) Install Django LogViewer:
 
@@ -37,3 +37,11 @@ pip install django-admin-logviewer
 Then visit:
 
 http://127.0.0.1:8000/logviewer/logs
+
+
+### Settings
+
+| Setting | Purpose |
+|---|---|
+| LOGVIEWER_LOGS | list of log files' paths |
+| LOGVIEWER_REFRESH_INTERVAL | in [ms] |
