@@ -24,15 +24,15 @@ def get_log_lines(request, log_id):
         'content': []
     }
 
-    file = open(LOGS[log_id], 'r')
-    file.seek(0, os.SEEK_END)
+    try:
+        with open(LOGS[log_id], 'r') as file:
+            file.seek(0, os.SEEK_END)
+            if last_position and last_position <= file.tell():
+                file.seek(last_position)
+            for line in file:
+                response['content'].append('%s' % line.replace('\n','<br/>'))
+            response['last_position'] = file.tell()
+        return JsonResponse(response)
+    except Exception as e:
+        return JsonResponse(str(e), status=400, safe=False)
 
-    if last_position and last_position <= file.tell():
-        file.seek(last_position)
-
-    for line in file:
-        response['content'].append('%s' % line.replace('\n','<br/>'))
-    response['last_position'] = file.tell()
-    file.close()
-
-    return JsonResponse(response)

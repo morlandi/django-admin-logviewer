@@ -53,6 +53,9 @@ class Log {
                 self.last_position = result.last_position;
                 self.printLines(result.content);
             },
+            error: function(xhr, ajaxOptions, thrownError) {
+                self.element.text(xhr.responseText);
+            },
             dataType: "json"
         });
 
