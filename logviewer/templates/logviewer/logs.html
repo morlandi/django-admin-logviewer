@@ -5,7 +5,12 @@
 {% block content %}
     {% for log in logs %}
          <fieldset class="module aligned collapse">
-            <h2>{{ log }}</h2>
+            <h2>
+                {{ log }}
+                <div style="float: right;">
+                    <input type="checkbox" checked id="scroll-{{forloop.counter0}}"> {% trans 'Autoscroll' %}
+                </div>
+            </h2>
             <div class="log">
                 <div style="text-align: center; width: 100%; margin-bottom: 5px;">
                     <div class="log-windows" id="log-window-{{forloop.counter0}}" rows=20>
@@ -22,22 +27,27 @@
     {{ block.super }}
     <script type="text/javascript">
 
+        var LOGVIEWER_URL_GETLOGLINES = '{% url "logviewer:get_log_lines" 11111 %}';
+        var REFRESH_INTERVAL = {{refresh_interval}};
         var log_objects = [];
 
         (function ($) {
 
-            {% for log in logs %}
-                var selector = '#log-window-{{forloop.counter0}}';
-                var log_object = new Log($(selector), '{{log}}');
-                log_object.startReading();
-                log_objects.push(log_object);
-            {% endfor %}
+            $(document).ready(function () {
+                {% for log in logs %}
+                    var selector = '#log-window-{{forloop.counter0}}';
+                    var log_object = new Log($(selector), {{forloop.counter0}}, '{{log}}');
+                    log_object.start();
+                    log_objects.push(log_object);
+                {% endfor %}
 
-            var timer = setInterval(tick, 1000);
+                $('.collapse-toggle').on('click', toggle_log_window);
+            });
+
         })(django.jQuery);
 
-        function tick() {
-            console.log(log_objects);
+        function toggle_log_window(event) {
+            console.log('toggle');
         }
 
     </script>
