@@ -49,10 +49,10 @@ http://127.0.0.1:8000/logviewer/logs
 
 ### Settings
 
-| Setting | Purpose |
-|---|---|
-| LOGVIEWER_LOGS | list of log files' paths |
-| LOGVIEWER_REFRESH_INTERVAL | in [ms] |
+| Setting | Purpose | Default |
+|---|---|---|
+| LOGVIEWER_LOGS | list of log files' paths | [] |
+| LOGVIEWER_REFRESH_INTERVAL | in [ms] | 1000 |
 
 
 ### Screenshots
