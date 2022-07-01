@@ -1,12 +1,13 @@
 {% extends "logviewer/base.html" %}
-{% load i18n static admin_modify admin_urls %}
+{% load i18n static admin_modify admin_urls logviewer_tags %}
 
 
 {% block content %}
     {% for log in logs %}
          <fieldset class="module aligned collapse">
             <h2>
-                {{ log }}
+                {{ log|dirname }}&nbsp;/&nbsp;
+                <a href="{% url 'logviewer:download' forloop.counter0 %}" class="button" title="{% trans 'Download log file ...' %}">{{ log|basename }}</a>
                 <div style="float: right;">
                     <input type="checkbox" checked id="scroll-{{forloop.counter0}}"> {% trans 'Autoscroll' %}
                 </div>
@@ -54,10 +55,13 @@
 {% endblock extrahead %}
 
 
-
 {% block extrastyle %}
     {{ block.super }}
     <style>
+
+        .module {
+            margin-bottom: 4px;
+        }
 
         fieldset.collapsed div.log {
             display: none;
