@@ -45,3 +45,9 @@ http://127.0.0.1:8000/logviewer/logs
 |---|---|
 | LOGVIEWER_LOGS | list of log files' paths |
 | LOGVIEWER_REFRESH_INTERVAL | in [ms] |
+
+
+### Screenshots
+
+![index](./screenshots/index.png)
+
