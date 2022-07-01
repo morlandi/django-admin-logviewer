@@ -4,6 +4,14 @@ Allows the viewing and download of specific log files in real time directly from
 
 Inspired by [Django LogTailer](https://github.com/fireantology/django-logtailer)
 
+Features:
+
+- log files will be shown incrementally in "follow mode"
+- the whole log file can be downloaded for later inspection
+- no Django Models are installed
+- the list of viewable log files is hardcoded in Django settings for security reasons
+
+
 ### Quick start
 
 1) Install Django LogViewer:
