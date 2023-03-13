@@ -53,6 +53,7 @@ http://127.0.0.1:8000/logviewer/logs
 |---|---|---|
 | LOGVIEWER_LOGS | list of log files' paths | [] |
 | LOGVIEWER_REFRESH_INTERVAL | in [ms] | 1000 |
+| LOGVIEWER_INITIAL_NUMBER_OF_CHARS | initial n. of chars read from the tail of the existing file | 2048 |
 
 
 ### Screenshots

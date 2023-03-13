@@ -5,7 +5,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.urls import reverse
-from .app_settings import LOGS, REFRESH_INTERVAL
+from .app_settings import LOGS, REFRESH_INTERVAL, INITIAL_NUMBER_OF_CHARS
 
 
 @staff_member_required
@@ -28,9 +28,22 @@ def get_log_lines(request, log_id):
 
     try:
         with open(LOGS[log_id], 'r') as file:
-            file.seek(0, os.SEEK_END)
-            if last_position and last_position <= file.tell():
-                file.seek(last_position)
+
+            # file.seek(0, os.SEEK_END)
+            # if last_position and last_position <= file.tell():
+            #     file.seek(last_position)
+
+            if last_position <= 0:
+                # The very first time, let's read the last INITIAL_NUMBER_OF_CHARS bytes
+                file.seek(0, os.SEEK_END)
+                position = max(0, file.tell() - INITIAL_NUMBER_OF_CHARS)
+                file.seek(position)
+            else:
+                # let's pick up where we left off
+                file.seek(0, os.SEEK_END)
+                if last_position <= file.tell():
+                    file.seek(last_position)
+
             for line in file:
                 response['content'].append('%s' % line.replace('\n','<br/>'))
             response['last_position'] = file.tell()
