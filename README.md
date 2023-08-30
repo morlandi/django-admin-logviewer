@@ -1,4 +1,4 @@
-## Django LogViewer
+## Django AdminLogViewer
 
 Allows the viewing and download of specific log files in real time directly from the Django admin interface.
 
