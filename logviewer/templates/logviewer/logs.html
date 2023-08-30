@@ -6,15 +6,15 @@
     {% for log in logs %}
          <fieldset class="module aligned collapse">
             <h2>
-                {{ log|dirname }}&nbsp;/&nbsp;
-                <a href="{% url 'logviewer:download' forloop.counter0 %}" class="button" title="{% trans 'Download log file ...' %}">{{ log|basename }}</a>
+                {{ log.path|dirname }}&nbsp;/&nbsp;
+                <a href="{% url 'logviewer:download' log.checksum %}" class="button" title="{% trans 'Download log file ...' %}">{{ log.path|basename }}</a>
                 <div style="float: right;">
-                    <input type="checkbox" checked id="scroll-{{forloop.counter0}}"> {% trans 'Autoscroll' %}
+                    <input type="checkbox" checked id="scroll-{{log.checksum}}"> {% trans 'Autoscroll' %}
                 </div>
             </h2>
             <div class="log">
                 <div style="text-align: center; width: 100%; margin-bottom: 5px;">
-                    <div class="log-windows" id="log-window-{{forloop.counter0}}" rows=20>
+                    <div class="log-windows" id="log-window-{{log.checksum}}" rows=20>
                     </div>
                 </div>
             </div>
@@ -36,8 +36,8 @@
 
             $(document).ready(function () {
                 {% for log in logs %}
-                    var selector = '#log-window-{{forloop.counter0}}';
-                    var log_object = new Log($(selector), {{forloop.counter0}}, '{{log}}');
+                    var selector = '#log-window-{{log.checksum}}';
+                    var log_object = new Log($(selector), '{{log.checksum}}', '{{log.path}}');
                     log_object.start();
                     log_objects.push(log_object);
                 {% endfor %}
