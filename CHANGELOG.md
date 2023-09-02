@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3 (2023-09-02)
+- Improved log-window style
+- log-window height can be resized by the user
+
 ## 0.1.2 (2023-08-30)
 - Accept wildcards in logs list (expanded with glob)
 
