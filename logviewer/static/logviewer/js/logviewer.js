@@ -42,6 +42,7 @@ class Log {
         var url = LOGVIEWER_URL_GETLOGLINES.replace("11111", self.log_id);
         self.current_scroll_position = self.element.scrollTop();
 
+        /*
         $.ajax({
             url: url,
             type: "get",
@@ -58,6 +59,18 @@ class Log {
             },
             dataType: "json"
         });
+        */
+
+        url += '?last_position=' + self.last_position;
+        fetch(url, {method: "GET"}).then(function(response) {
+            return response.json();
+        }).then(function(result) {
+            console.log('new lines: %o', result.content.length);
+            self.last_position = result.last_position;
+            self.printLines(result.content);
+        }).catch(function(error) {
+            self.element.text("ERROR: " + error);
+        });
 
     }
 
@@ -70,14 +83,14 @@ class Log {
             }
         }
 
-        var autoscroll = $('#scroll-' + self.log_id).prop('checked');
+        // var autoscroll = $('#scroll-' + self.log_id).prop('checked');
+        let autoscroll = document.getElementById('scroll-' + self.log_id).checked;
         if (autoscroll && lines.length) {
             self.element.scrollTop(self.element[0].scrollHeight - self.element.height());
         }
         else {
             self.element.scrollTop(self.current_scroll_position);
         }
-
     }
 
 }

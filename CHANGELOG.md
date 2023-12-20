@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.4 (2023-12-20)
+- replace jQuery with Vanilla JS for broader compatibility
+
 ## 0.1.3 (2023-09-02)
 - Improved log-window style
 - log-window height can be resized by the user
