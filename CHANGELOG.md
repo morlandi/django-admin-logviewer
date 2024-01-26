@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.5
+- fix for Windows: replace '\\' with '/' in log files path
+
 ## 0.1.4 (2023-12-20)
 - replace jQuery with Vanilla JS for broader compatibility
 

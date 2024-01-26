@@ -40,6 +40,10 @@ def logs(as_list):
     filenames = [] if as_list else {}
 
     def append_path(path):
+
+        # Fix for Windows
+        path = path.replace('\\', '/')
+
         checksum = hashlib.md5(path.encode()).hexdigest()
         if as_list:
             filenames.append({
